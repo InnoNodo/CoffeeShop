@@ -1,20 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <body>
+    <Parallax msg="Welcome to Your Vue.js App"/>
+  </body>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Parallax from './components/Parallax.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Parallax
   }
 }
 </script>
 
 <style>
+body {
+  background-color: #ffda91;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
