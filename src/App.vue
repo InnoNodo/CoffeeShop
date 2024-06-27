@@ -1,18 +1,21 @@
 <template>
   <body>
-    <Parallax msg="Welcome to Your Vue.js App"/>
+    <div>
+      <ParallaxComponent />
+    </div>
   </body>
 </template>
 
 <script>
-import Parallax from './components/Parallax.vue';
+import ParallaxComponent from './components/ParallaxComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    Parallax
+    ParallaxComponent
   }
-}
+};
+
 </script>
 
 <style>
