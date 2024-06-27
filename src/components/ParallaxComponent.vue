@@ -35,7 +35,7 @@ export default {
       const parallaxHeading = this.$refs.heading;
       if (parallaxCover) {
         const scrollPosition = window.pageYOffset;
-        parallaxCup.style.transform = `translateY(${scrollPosition}px)`;
+        parallaxCup.style.transform = `translateY(${scrollPosition * 1.3}px)`;
         parallaxCover.style.transform = `translateY(${scrollPosition * 0.8}px)`
         parallaxHeading.style.transform = `translateY(${scrollPosition}px)`
         console.log(scrollPosition)
@@ -49,7 +49,9 @@ export default {
   .heading {
     display: flex;
     justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Cooper BT", serif;
+    font-size: 75px;
+    font-weight: 700;
     font-size: 100px;
     margin-bottom: 10px
   }
