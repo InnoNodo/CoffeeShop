@@ -1,14 +1,14 @@
 <template>
   <div>
 
-    <div class="heading">
+    <div class="heading" ref="heading">
       CoffeeShop
     </div>
 
     <div class="parallax-container">
     
       <div>
-        <img src="../assets/images/cover.png" class="cover">
+        <img src="../assets/images/cover.png" class="cover" ref="cover">
       </div>
 
       <div>
@@ -30,11 +30,14 @@ export default {
   },
   methods: {
     handleScroll() {
-      console.log('pidor');
-      const parallax = this.$refs.cup;
-      if (parallax) {
+      const parallaxCup = this.$refs.cup;
+      const parallaxCover = this.$refs.cover;
+      const parallaxHeading = this.$refs.heading;
+      if (parallaxCover) {
         const scrollPosition = window.pageYOffset;
-        parallax.style.transform = `translateY(${scrollPosition * 0.25}px)`;
+        parallaxCup.style.transform = `translateY(${scrollPosition}px)`;
+        parallaxCover.style.transform = `translateY(${scrollPosition * 0.8}px)`
+        parallaxHeading.style.transform = `translateY(${scrollPosition}px)`
         console.log(scrollPosition)
       }
     },
@@ -53,10 +56,11 @@ export default {
 
   .cover {
     height: 100px;
-    margin-bottom: -5px;
+    margin-bottom: -105px;
   }
 
   .cup {
+    margin-top: 100px;
     width: 450px;
     margin-right: 23px;
   }
