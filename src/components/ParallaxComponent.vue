@@ -6,19 +6,21 @@
 
     <div class="cover-container">
       <img src="../assets/images/cover.png" class="cover" ref="cover">
-      <div class="vapour" ref="vapour">
-        <span style="--v:1;"></span>
-        <span style="--v:2;"></span>
-        <span style="--v:5;"></span>
-        <span style="--v:4;"></span>
-        <span style="--v:6;"></span>
-        <span style="--v:19;"></span>
-        <span style="--v:7;"></span>
-        <span style="--v:8;"></span>
-        <span style="--v:9;"></span>
-        <span style="--v:10;"></span>
-        <span style="--v:11;"></span>
-        <span style="--v:18;"></span>
+      <div class="vapour-container" ref="vapourContainer">
+        <div class="vapour" ref="vapour">
+          <span style="--v:1;"></span>
+          <span style="--v:2;"></span>
+          <span style="--v:5;"></span>
+          <span style="--v:4;"></span>
+          <span style="--v:6;"></span>
+          <span style="--v:19;"></span>
+          <span style="--v:7;"></span>
+          <span style="--v:8;"></span>
+          <span style="--v:9;"></span>
+          <span style="--v:10;"></span>
+          <span style="--v:11;"></span>
+          <span style="--v:18;"></span>
+        </div>
       </div>
     </div>
 
@@ -27,7 +29,6 @@
     </div>         
   </div>
 </template>
-
 
 <script>
 export default {
@@ -49,27 +50,30 @@ export default {
       const parallaxCover = this.$refs.cover;
       const parallaxHeading = this.$refs.heading;
       const parallaxVapour = this.$refs.vapour;
+      const vapourContainer = this.$refs.vapourContainer
       
       if (scrollPosition < screenHeight) {
-        parallaxCup.style.transform = `translateY(${scrollPosition * 1.3}px)`;
-        parallaxCover.style.transform = `translateY(${scrollPosition * 0.8}px)`;
+        
         parallaxHeading.style.transform = `translateY(${scrollPosition}px)`;
+        parallaxCover.style.transform = `translateY(${scrollPosition * 0.8}px)`;
         parallaxVapour.style.transform = `translateY(${scrollPosition * 1.3}px)`;
+        parallaxCup.style.transform = `translateY(${scrollPosition * 1.3}px)`;
+        vapourContainer.style.transform = `translateY(${scrollPosition * 1.3}px)`;
+      
       }
     },
   },
 }
 </script>
 
-
 <style scoped>
   .heading {
     display: flex;
     justify-content: center;
     font-family: "Cooper BT", serif;
-    font-size: 90px;
+    font-size: 100px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
   }
 
   .parallax-container {
@@ -77,10 +81,7 @@ export default {
     position: relative;
   }
 
-  .cover-container {
-    height: 100px;
-    position: relative;
-  }
+
 
   .cover {
     height: 100px;
@@ -93,6 +94,22 @@ export default {
   .cup {
     width: 450px;
     margin-right: 23px;
+    z-index: 2;
+  }
+  
+  .cover-container {
+    z-index: 2;
+    height: 100px;
+    position: relative;
+  }
+
+  .vapour-container {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
   }
 
   .vapour {
@@ -103,6 +120,7 @@ export default {
     display: flex;
     z-index: 1;
     justify-content: center;
+    
   }
 
   .vapour span {
