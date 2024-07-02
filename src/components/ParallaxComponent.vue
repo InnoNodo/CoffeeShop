@@ -1,24 +1,33 @@
 <template>
-  <div>
-
+  <div class="parallax-container">
     <div class="heading" ref="heading">
-      CoffeeShop
+        CoffeeShop
     </div>
 
-    <div class="parallax-container">
-    
-      <div>
-        <img src="../assets/images/cover.png" class="cover" ref="cover">
+    <div class="cover-container">
+      <img src="../assets/images/cover.png" class="cover" ref="cover">
+      <div class="vapour" ref="vapour">
+        <span style="--v:1;"></span>
+        <span style="--v:2;"></span>
+        <span style="--v:5;"></span>
+        <span style="--v:4;"></span>
+        <span style="--v:6;"></span>
+        <span style="--v:19;"></span>
+        <span style="--v:7;"></span>
+        <span style="--v:8;"></span>
+        <span style="--v:9;"></span>
+        <span style="--v:10;"></span>
+        <span style="--v:11;"></span>
+        <span style="--v:18;"></span>
       </div>
-
-      <div>
-        <img src="../assets/images/cup.png" class="cup" ref="cup">
-      </div>
-
     </div>
-</div>
-  
+
+    <div class="cup-container">
+      <img src="../assets/images/cup.png" class="cup" ref="cup">
+    </div>         
+  </div>
 </template>
+
 
 <script>
 export default {
@@ -26,77 +35,105 @@ export default {
     document.addEventListener('scroll', this.handleScroll);
   },
   beforeUnmount() {
-    // window.removeEventListener('scroll', this.handleScroll);
+    document.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     handleScroll() {
+      const scrollPosition = window.pageYOffset;
+      const screenHeight = window.innerHeight;
+
+      console.log('Scroll position:', scrollPosition);
+
+      // Параллакс для элементов
       const parallaxCup = this.$refs.cup;
       const parallaxCover = this.$refs.cover;
       const parallaxHeading = this.$refs.heading;
-      if (parallaxCover) {
-        const scrollPosition = window.pageYOffset;
+      const parallaxVapour = this.$refs.vapour;
+      
+      if (scrollPosition < screenHeight) {
         parallaxCup.style.transform = `translateY(${scrollPosition * 1.3}px)`;
-        parallaxCover.style.transform = `translateY(${scrollPosition * 0.8}px)`
-        parallaxHeading.style.transform = `translateY(${scrollPosition}px)`
-        console.log(scrollPosition)
+        parallaxCover.style.transform = `translateY(${scrollPosition * 0.8}px)`;
+        parallaxHeading.style.transform = `translateY(${scrollPosition}px)`;
+        parallaxVapour.style.transform = `translateY(${scrollPosition * 1.3}px)`;
       }
     },
   },
 }
 </script>
 
+
 <style scoped>
   .heading {
     display: flex;
     justify-content: center;
     font-family: "Cooper BT", serif;
-    font-size: 75px;
+    font-size: 90px;
     font-weight: 700;
-    font-size: 100px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+  }
+
+  .parallax-container {
+    height: 1000px;
+    position: relative;
+  }
+
+  .cover-container {
+    height: 100px;
+    position: relative;
   }
 
   .cover {
     height: 100px;
-    margin-bottom: -105px;
+  }
+
+  .cup-container {
+    position: relative;
   }
 
   .cup {
-    margin-top: 100px;
     width: 450px;
     margin-right: 23px;
   }
 
-  .navigation-panel {
+  .vapour {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-
+    z-index: 1;
+    justify-content: center;
   }
 
-  .parallax-container {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
+  .vapour span {
+    position: relative;
+    display: block;
+    min-width: 8px;
+    height: 120px;
+    background: #fff;
+    border-radius: 50%;
+    animation: animate 5s linear infinite;
+    opacity: 0;
+    filter: blur(10px);
+    animation-delay: calc(var(--v) * -0.5s);
+  }
 
-.parallax {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.parallax img {
-  width: 100%;
-  height: auto;
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-  padding: 20px;
-  color: white;
-}
-
+  @keyframes animate {
+    0% {
+      transform: translateY(0) scaleX(1);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-150px) scaleX(5);
+    }
+    95% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(-300px) scaleX(10);
+    }
+  }
 </style>
